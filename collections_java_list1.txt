@@ -1,0 +1,52 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class List1 {
+    public static void main(String[] args) {
+
+        Scanner tec = new Scanner(System.in);
+
+        int valor, somaSim = 0;
+
+        List<Integer> respostas = new ArrayList<>();
+
+        List<String> perguntas = new ArrayList<>(){{
+           add("Telefonou para a vitima?");
+           add( "Esteve no local?");
+           add("Mora perto da vitima?");
+           add("Devia para a vitima?");
+           add("Já trabalhou com a vitima?");
+        }};
+
+        System.out.println("Digite 1 = SIM, 2 = NAO\n");
+
+        for (int i = 0; i < perguntas.size(); i++){
+
+            System.out.println(perguntas.get(i));
+
+            valor = tec.nextInt();
+            respostas.add(valor);
+
+            if(valor == 1) {
+                somaSim += 1;
+            }else if(valor > 2){
+
+                System.out.println("Digite outro valor!\n");
+
+                valor = tec.nextInt();
+                respostas.set(respostas.lastIndexOf(i), valor);
+            }
+        }
+
+        if(somaSim == 2){
+            System.out.println("Você é a suspeita");
+        }else if(somaSim >= 3 && somaSim <= 4){
+            System.out.println("Você é o cumplice");
+        }else if(somaSim > 4){
+            System.out.println("Você é o assassino");
+        }else{
+            System.out.println("Você está livre");
+        }
+    }
+}
