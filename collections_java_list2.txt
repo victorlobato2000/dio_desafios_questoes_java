@@ -1,0 +1,89 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+public class List2{
+
+    public static void main(String[] args) {
+
+        Double soma = 0d, media;
+
+        List<Mes> meses = new ArrayList<>(){{
+            add(new Mes("janeiro", 31.5));
+            add(new Mes("fevereiro", 28.5));
+            add(new Mes("março", 17.5));
+            add(new Mes("abril", 12d));
+            add(new Mes("maio", 15d));
+            add(new Mes("junho", 27d));
+            add(new Mes("julho", 18.5));
+            add(new Mes("agosto", 28d));
+            add(new Mes("setembro", 21d));
+            add(new Mes("outubro", 29.5));
+            add(new Mes("novembro", 28.5));
+            add(new Mes("dezembro", 34.5));
+        }};
+
+        for(int i = 0; i < 6; i++){
+            soma += meses.get(i).getTemp();
+        }
+
+        //media semestral ( 6 meses )
+        media = soma/6;
+
+        System.out.println("A media é "+ media);
+
+        //mostrar quais dos 6 primeiros meses tem valor maior ou igual a media dos 6 primeiros meses
+        for(int i = 0; i < 6; i++){
+            Mes mes = meses.get(i);
+            if(mes.getTemp() >= media) System.out.println("O mês de "+ mes.getNome() + " tem temperatura de "+ mes.getTemp() +" que é maior/igual a media = "+ media);
+        }
+    }
+}
+
+class Mes{
+
+    private String nome;
+    private Double temp;
+
+    public Mes(String nome, Double temp) {
+        this.nome = nome;
+        this.temp = temp;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public Double getTemp() {
+        return temp;
+    }
+
+    public void setTemp(Double temp) {
+        this.temp = temp;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Mes mes = (Mes) o;
+        return Objects.equals(nome, mes.nome) && Objects.equals(temp, mes.temp);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nome, temp);
+    }
+
+    @Override
+    public String toString() {
+        return "Mes{" +
+                "nome='" + nome + '\'' +
+                ", temp=" + temp +
+                '}';
+    }
+}
